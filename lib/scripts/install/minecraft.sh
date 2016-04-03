@@ -17,9 +17,10 @@ spigotVersion="latest"
 spongeVersion="1.8-1519-2.1DEV-693"
 forgeVersion="1.8-11.14.3.1519"
 vanillaVersion="1.8.8"
+thermosVersion="1.7.10-1614.46"
 useDocker="false";
 
-while getopts ":b:u:r:s:f:p:v:d" opt; do
+while getopts ":b:u:r:s:f:p:v:d:t" opt; do
     case "$opt" in
     b)
         base=$OPTARG
@@ -45,6 +46,8 @@ while getopts ":b:u:r:s:f:p:v:d" opt; do
     d)
         useDocker="true"
         ;;
+    t) 
+       thermosVersion=$OPTARG
     esac
 done
 base=${base}/
@@ -131,6 +134,10 @@ elif [ "$plugin" == "sponge" ]; then
 elif [[ "$plugin" == "vanilla" ]]; then
     echo "installer:~$ curl -o server.jar https://s3.amazonaws.com/Minecraft.Download/versions/${vanillaVersion}/minecraft_server.${vanillaVersion}.jar"
     curl -o server.jar https://s3.amazonaws.com/Minecraft.Download/versions/${vanillaVersion}/minecraft_server.${vanillaVersion}.jar
+    checkResponseCode
+elif [[ "$plugin" == "thermos" ]]; then 
+    echo echo "installer:~$ curl -o Thermos-${thermosVersion}.zip http://tcpr.ca/files/thermos/Thermos-${thermosVersion}.zip"
+    curl -o Thermos-${thermosVersion}.zip http://tcpr.ca/files/thermos/Thermos-${thermosVersion}.zip
     checkResponseCode
 fi
 
