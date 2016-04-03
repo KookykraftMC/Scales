@@ -48,6 +48,7 @@ while getopts ":b:u:r:s:f:p:v:d:t" opt; do
         ;;
     t) 
        thermosVersion=$OPTARG
+       ;;
     esac
 done
 base=${base}/
